@@ -20,14 +20,15 @@ body {
     color: rgb(var(--foreground-rgb));
     background: linear-gradient(to bottom, transparent, rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
 }
-body::-webkit-scrollbar {
+::-webkit-scrollbar {
     width: 5px;
+    height: 5px;
 }
-body::-webkit-scrollbar-track {
-    background-color: #9dc7ce;
+::-webkit-scrollbar-track {
+    background-color: #1e1e1e00;
 }
-body::-webkit-scrollbar-thumb {
-    background-color: #009919;
+::-webkit-scrollbar-thumb {
+    background-color: #313131;
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
