@@ -87,6 +87,7 @@ function TabsHeader() {
                     </li>
                 </ul>
             </div>
+
             <div id="tabContentExample" className="overflow-x-scroll rounded-lg w-2/3 pb-2 mb-4 h-[146px]">
                 <ul className="flex hidden items-center " id="today-example" role="tabpanel" aria-labelledby="today-tab-example">
                     <Card active />
@@ -132,7 +133,7 @@ function TabsHeader() {
                 </ul>
             </div>
             <div className="w-full ">
-                <ImgGif />
+                <ImgGif icon={10} />
             </div>
         </div>
     );
