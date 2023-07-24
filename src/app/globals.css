@@ -35,3 +35,6 @@ body {
     -ms-border-radius: 50px;
     -o-border-radius: 50px;
 }
+::selection {
+    background: #b65800;
+}

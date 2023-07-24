@@ -24,7 +24,7 @@ function SearchBar() {
             interactive
             placement="bottom"
             render={(attrs) => (
-                <div className="w-[314px] rounded-lg text-sm py-2 bg-[#1e1e1e]" tabIndex="-1" {...attrs}>
+                <div className="w-[350.66px] rounded-lg text-sm py-2 bg-[#1e1e1e]" tabIndex="-1" {...attrs}>
                     <Link className="block p-2 mb-1  hover:bg-[#2e2c2cce] border-b border-[#555]" href="#">
                         My location
                     </Link>
@@ -81,7 +81,7 @@ function SearchBar() {
                 </div>
             )}
         >
-            <section className=" flex w-full max-w-[346px] flex-col px-4">
+            <section className=" flex w-full  flex-col">
                 <div className="relative h-fit flex  content-center items-center">
                     <span id="search-icon" className="absolute left-4 cursor-default">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -1,10 +1,47 @@
 "use client";
 import { Tabs } from "flowbite";
-import BigRain from "../bigRain/BigRain";
 import { useEffect } from "react";
 import Card from "../card/Card";
+import ImgGif from "../imageGif/ImgGif";
 
 function TabsHeader() {
+    let animationFrameId = null;
+    const handleScrollHorizontally = (event) => {
+        event.preventDefault();
+        const container = event.currentTarget;
+        const delta = event.deltaY;
+
+        const scrollStep = 10;
+        let scrollAmount = 0;
+
+        cancelAnimationFrame(animationFrameId);
+
+        const animateScroll = () => {
+            scrollAmount += scrollStep;
+
+            if (delta < 0) {
+                container.scrollLeft -= scrollStep;
+            } else {
+                container.scrollLeft += scrollStep;
+            }
+
+            if (scrollAmount < Math.abs(delta)) {
+                animationFrameId = requestAnimationFrame(animateScroll);
+            }
+        };
+
+        animationFrameId = requestAnimationFrame(animateScroll);
+    };
+
+    useEffect(() => {
+        const container = document.querySelector("#tabContentExample");
+        container.addEventListener("wheel", handleScrollHorizontally, { passive: false });
+
+        return () => {
+            container.removeEventListener("wheel", handleScrollHorizontally);
+        };
+    }, []);
+
     useEffect(() => {
         const tabElements = [
             {
@@ -19,18 +56,21 @@ function TabsHeader() {
             },
         ];
 
-        // options with default values
         const options = {
             defaultTabId: "today",
             activeClasses: "text-white",
             inactiveClasses: "text-gray-500 dark:text-gray-400",
             onShow: () => {
-                console.log("tab is shown");
+                const container = document.querySelector("#tabContentExample");
+                container.scrollTo({
+                    left: 0,
+                    behavior: "smooth",
+                });
             },
         };
-
         const tabs = new Tabs(tabElements, options);
     }, []);
+
     return (
         <div className="">
             <div className="mb-2  ">
@@ -47,9 +87,27 @@ function TabsHeader() {
                     </li>
                 </ul>
             </div>
-            <div id="tabContentExample" className="overflow-x-scroll rounded-lg w-2/3 p-1 mb-4 h-[146px]">
+            <div id="tabContentExample" className="overflow-x-scroll rounded-lg w-2/3 pb-2 mb-4 h-[146px]">
                 <ul className="flex hidden items-center " id="today-example" role="tabpanel" aria-labelledby="today-tab-example">
                     <Card active />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
+                    <Card />
                     <Card />
                     <Card />
                     <Card />
@@ -73,9 +131,8 @@ function TabsHeader() {
                     <Card />
                 </ul>
             </div>
-            <div className="flex w-fit rounded-xl overflow-hidden border border-[#424242]">
-                <BigRain />
-                <BigRain />
+            <div className="w-full ">
+                <ImgGif />
             </div>
         </div>
     );
