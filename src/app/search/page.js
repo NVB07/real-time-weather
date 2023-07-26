@@ -20,14 +20,14 @@ function Search() {
             const response = await GetWeather(option, data.lat, data.lon);
             setDetailsWeather(response.hourly || response.daily);
         };
-        fetchData();
+        if (data) fetchData();
     }, [data, option]);
 
     return (
         <div className="w-full min-h-screen flex items-center justify-center bg-[#2e2e2e]">
             <DataContext.Provider value={{ data, setData }}>
                 <div className="w-[1200px] max-w-[1200px] bg-[#111015] rounded-xl min-h-[80vh] p-4 px-8 relative z-20">
-                    <SearchHeader data={data} />
+                    <SearchHeader data={data} weather={detailsWeather} />
                     <div className="">
                         <MainContent data={detailsWeather} changeOption={setOption} currentOption={option} />
                     </div>

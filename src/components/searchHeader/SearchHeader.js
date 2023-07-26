@@ -3,7 +3,7 @@ import Link from "next/link";
 import DateTime from "../date/DateTime";
 import SearchBar from "../SearchBar/SearchBar";
 
-function SearchHeader({ data }) {
+function SearchHeader({ data, weather }) {
     return (
         <div className="w-full h-fit flex items-center justify-between mb-4">
             <Link href="/" className="flex items-center w-[70px]  hover:bg-[#2726264f] p-1 rounded-lg group">
@@ -13,7 +13,7 @@ function SearchHeader({ data }) {
                 </svg>
                 <span className="text-xs text-[#fffc] group-hover:text-inherit  group-hover:px-1 transition-all">Home</span>
             </Link>
-            <DateTime />
+            <DateTime data={weather} />
             <div className="flex items-center mx-1 w-60 overflow-x-hidden">
                 <svg fill="#fff4" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24">
                     <path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z" />

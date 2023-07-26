@@ -1,7 +1,7 @@
 import Main from "./gif/Main";
 
 function ImgGif({ icon = 0 }) {
-    const classes = "flex items-center w-fit rounded-xl overflow-hidden border border-[#424242]";
+    const classes = "flex items-center ";
     function getIcon() {
         if (icon < 5) {
             return (

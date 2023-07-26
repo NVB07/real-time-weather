@@ -1,4 +1,4 @@
-function DateTime() {
+function DateTime({ data }) {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
     let month = currentDate.getMonth() + 1;
@@ -6,6 +6,7 @@ function DateTime() {
         month = `0${month}`;
     }
     const day = currentDate.getDate();
+    const allTime = data.data ? (data.data[0].date ? data.data[0].date.substr(0, 10) : data.data[0].day ? data.data[0].day : `${day}/${month}/${year}`) : `${day}/${month}/${year}`;
 
     return (
         <div className="flex items-center text-sm">
@@ -20,9 +21,7 @@ function DateTime() {
                 <rect x="10.5" y="12" width="3" height="3" rx="0.5" fill="#fff4" />
                 <rect x="15" y="12" width="3" height="3" rx="0.5" fill="#fff4" />
             </svg>
-            <span className="ml-1 text-[#fffc]">
-                {day}/{month}/{year}
-            </span>
+            <span className="ml-1 text-[#fffc]">{allTime}</span>
         </div>
     );
 }
