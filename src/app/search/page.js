@@ -1,15 +1,38 @@
+"use client";
 import SearchHeader from "@/components/searchHeader/SearchHeader";
-import TabsHeader from "@/components/tabs/TabsHeader";
+import MainContent from "@/components/mainContent/MainContent";
+import { useEffect, useState } from "react";
+import { GetWeather } from "@/features/Api";
+import DataContext from "@/components/context/DataContext";
 
 function Search() {
+    const [data, setData] = useState("");
+    const [option, setOption] = useState("hourly");
+    const [detailsWeather, setDetailsWeather] = useState("");
+    const [isFirstRender, setIsFirstRender] = useState(true);
+    useEffect(() => {
+        if (isFirstRender) {
+            setIsFirstRender(false);
+            return;
+        }
+
+        const fetchData = async () => {
+            const response = await GetWeather(option, data.lat, data.lon);
+            setDetailsWeather(response.hourly || response.daily);
+        };
+        fetchData();
+    }, [data, option]);
+
     return (
         <div className="w-full min-h-screen flex items-center justify-center bg-[#2e2e2e]">
-            <div className="w-[1200px] max-w-[1200px] bg-[#111015] rounded-xl min-h-[80vh] p-4 px-8 relative z-20">
-                <SearchHeader />
-                <div className="">
-                    <TabsHeader />
+            <DataContext.Provider value={{ data, setData }}>
+                <div className="w-[1200px] max-w-[1200px] bg-[#111015] rounded-xl min-h-[80vh] p-4 px-8 relative z-20">
+                    <SearchHeader data={data} />
+                    <div className="">
+                        <MainContent data={detailsWeather} changeOption={setOption} currentOption={option} />
+                    </div>
                 </div>
-            </div>
+            </DataContext.Provider>
         </div>
     );
 }

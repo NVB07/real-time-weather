@@ -37,6 +37,9 @@ function SearchBar() {
         clearTimeout(blurTimeoutRef.current);
         setShowResult(true);
     };
+    const handleResultItemClick = () => {
+        setSearchValue("");
+    };
 
     return (
         <section className="relative flex w-full  flex-col">
@@ -58,7 +61,7 @@ function SearchBar() {
                     placeholder="Search city"
                 />
             </div>
-            <ResultItem array={searchResult} state={showResult} />
+            <ResultItem array={searchResult} state={showResult} onResultItemClick={handleResultItemClick} />
         </section>
     );
 }

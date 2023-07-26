@@ -1,18 +1,46 @@
 "use client";
 import { useContext } from "react";
-import { GetWeather } from "@/features/Api";
-import { DataContext } from "../searchHeader/SearchHeader";
+import { nearestNamedPlace } from "@/features/Api";
+import DataContext from "../context/DataContext";
 
-function ResultItem({ array, state = false }) {
-    const { setDataFromChild } = useContext(DataContext);
+function ResultItem({ array, state = false, onResultItemClick }) {
+    const { setData } = useContext(DataContext);
     let show = state ? "block" : "hidden";
+
+    function getCurrentLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
+                    const myLocation = { lat: latitude, lon: longitude };
+                    const getName = async () => {
+                        const response = await nearestNamedPlace(myLocation);
+                        setData(response);
+                    };
+                    getName();
+                },
+                (error) => {
+                    console.error("Error getting location:", error.message);
+                }
+            );
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+        }
+    }
+
     const getItem = (item) => {
-        setDataFromChild(item.name);
+        onResultItemClick();
+        setData(item);
     };
     return (
         <div className={`absolute top-12 w-[350.66px] rounded-lg text-sm py-2 bg-[#1e1e1e] ${show}`}>
             <ul id="box-result" className=" max-h-80 overflow-auto">
-                {(Array.isArray(array) && array.length === 0 && <div className="block p-2 cursor-pointer  hover:bg-[#2e2c2cce] ">My location</div>) ||
+                {(Array.isArray(array) && array.length === 0 && (
+                    <div onClick={() => getCurrentLocation()} className="block p-2 cursor-pointer  hover:bg-[#2e2c2cce] ">
+                        My location
+                    </div>
+                )) ||
                     (Array.isArray(array) &&
                         array.map((item) => (
                             <li onClick={() => getItem(item)} key={item.place_id} className="block hover:bg-[#2e2c2cce] cursor-pointer">
