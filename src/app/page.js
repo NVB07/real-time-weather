@@ -4,15 +4,15 @@ export default function Home() {
     return (
         <div className="w-full min-h-screen flex items-center bg-gradient-to-b from-[#444] to-sky-500 justify-center p-9 relative">
             <div className="absolute w-full h-full top-0 left-0 bg-rain-bg z-10"></div>
-            <div className="w-[1200px] max-w-[1200px] bg-[#dadadabe] rounded-xl min-h-[80vh] p-4 px-8 relative z-20">
+            <div className="w-[1200px] max-w-[1200px] bg-[#6d6d6dbe] rounded-xl min-h-[80vh] p-4 px-8 relative z-20">
                 <div className="w-full h-14 flex items-center justify-between">
                     <Link className="w-fit h-full  flex items-center" href="/">
                         <Image className="w-auto h-auto" src="/logo.png" priority width={40} height={80} alt="logo" />
-                        <h3 className="ml-2 text-xl text-zinc-700 font-semibold">Weather</h3>
+                        <h3 className="ml-2 text-xl text-[#00f2ff] font-semibold">Weather</h3>
                     </Link>
                     <a
                         href="https://www.facebook.com/profile.php?id=100030906050783"
-                        className="bg-transparent flex items-center justify-center hover:bg-blue-500 text-blue-700 font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded-lg"
+                        className="bg-transparent flex items-center justify-center hover:bg-blue-600 text-[#00d8ff] font-semibold hover:text-white py-1 px-4 border border-blue-500 hover:border-transparent rounded-lg"
                     >
                         <svg className="w-4 h-4 mr-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 8 19">
                             <path fillRule="evenodd" d="M6.135 3H8V0H6.135a4.147 4.147 0 0 0-4.142 4.142V6H0v3h2v9.938h3V9h2.021l.592-3H5V3.591A.6.6 0 0 1 5.592 3h.543Z" clipRule="evenodd" />
@@ -22,18 +22,18 @@ export default function Home() {
                 </div>
                 <div className="flex w-full h-full ">
                     <div className="w-1/2 flex flex-col justify-center h-full mt-12">
-                        <h3 className="text-4xl leading-relaxed text-[#583116] font-semibold">
-                            <span className="text-[#2e8b25] text-5xl">Smart</span>{" "}
-                            <sup className="inline-flex items-center mx-1 justify-center w-14 h-14 text-xl mb-1 rounded-full border border-[#a916bd]">and</sup>
-                            <span className="text-amber-800 text-5xl">Convenient</span> Weather Assistant <br /> In Your Device
+                        <h3 className="text-4xl leading-relaxed text-[#fff] font-semibold">
+                            <span className="text-[#00ff07] text-5xl">Smart</span>{" "}
+                            <sup className="inline-flex items-center mx-1 justify-center w-14 h-14 text-xl mb-1 rounded-full border border-[#0ff]">and</sup>
+                            <span className="text-[#00ff07] text-5xl">Convenient</span> Weather Assistant <br /> In Your Device
                         </h3>
-                        <p className="text-[#686868] my-5">
+                        <p className="text-[#77ccd6] my-5">
                             Find out what can be waiting for you <br /> on the street with a few taps
                         </p>
                         <Link href="/search" className="w-fit inline-block mt-3">
                             <button
                                 type="button"
-                                className="text-white bg-green-700 hover:bg-green-800 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+                                className="text-white bg-green-600 hover:bg-green-800 focus:outline-none font-medium rounded-full text-sm px-5 py-2.5 text-center mr-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
                             >
                                 Try Now
                                 <svg className="w-3.5 h-3.5 ml-2 inline-block" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 10">
