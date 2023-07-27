@@ -6,7 +6,7 @@ import useDebounce from "@/hooks/useDebounce";
 import ResultItem from "../searchResult/ResultItem";
 
 function SearchBar() {
-    const [showResult, setShowResult] = useState(true);
+    const [showResult, setShowResult] = useState(false);
     const [searchValue, setSearchValue] = useState("");
     const [searchResult, setSearchResult] = useState([]);
 
