@@ -34,7 +34,7 @@ function ResultItem({ array, state = false, onResultItemClick }) {
         setData(item);
     };
     return (
-        <div className={`absolute top-12 w-[350.66px] rounded-lg text-sm py-2 bg-[#1e1e1e] ${show}`}>
+        <div className={`absolute top-12 w-[350.66px] max-[1199px]:w-full max-[1024px]:w-[260px] max-[1024px]:right-0  rounded-lg text-sm py-2 bg-[#1e1e1e] ${show}`}>
             <ul id="box-result" className=" max-h-80 overflow-auto">
                 {(Array.isArray(array) && array.length === 0 && (
                     <div onClick={() => getCurrentLocation()} className="block p-2 cursor-pointer  hover:bg-[#2e2c2cce] ">

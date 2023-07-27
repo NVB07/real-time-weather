@@ -6,7 +6,7 @@ import useDebounce from "@/hooks/useDebounce";
 import ResultItem from "../searchResult/ResultItem";
 
 function SearchBar() {
-    const [showResult, setShowResult] = useState(false);
+    const [showResult, setShowResult] = useState(true);
     const [searchValue, setSearchValue] = useState("");
     const [searchResult, setSearchResult] = useState([]);
 
@@ -42,9 +42,9 @@ function SearchBar() {
     };
 
     return (
-        <section className="relative flex w-full  flex-col">
+        <section className="relative flex w-full flex-col">
             <div className="relative h-fit flex  content-center items-center">
-                <span onClick={() => searchInputRef.current.focus()} id="search-icon" className="absolute left-4 cursor-default">
+                <span onClick={() => searchInputRef.current.focus()} id="search-icon" className="absolute left-4 z-10 cursor-default">
                     <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
                     </svg>
@@ -57,7 +57,7 @@ function SearchBar() {
                     value={searchValue}
                     autoComplete="off"
                     type="text"
-                    className="w-full rounded-full bg-[#1e1e1e] py-2 pl-10 pr-5 text-base focus:ring-transparent  border-none outline-none"
+                    className="w-full  rounded-full bg-[#1e1e1e] py-2 pl-10 pr-5 text-base focus:ring-transparent  border-none outline-none"
                     placeholder="Search city"
                 />
             </div>

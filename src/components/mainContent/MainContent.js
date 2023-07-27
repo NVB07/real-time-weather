@@ -111,8 +111,8 @@ function MainContent({ data, changeOption }) {
                 </ul>
             </div>
 
-            <div className="w-full flex justify-between">
-                <div id="tabContentExample" className="overflow-x-scroll rounded-lg w-2/3 pb-2 mb-4 h-[146px]">
+            <div className="w-full flex max-[1199px]:flex-col max-[1199px]:mb-4 justify-between">
+                <div id="tabContentExample" className="overflow-x-scroll max-[1199px]:w-full rounded-lg w-2/3 pb-2 mb-4 h-[146px]">
                     <ul className="flex hidden items-center " id="today-example" role="tabpanel" aria-labelledby="today-tab-example">
                         {data &&
                             data.data.map((item, index) => {
@@ -139,19 +139,19 @@ function MainContent({ data, changeOption }) {
                             })}
                     </ul>
                 </div>
-                <div className="w-[30%] h-[146px] ">
-                    <div className="w-full">
+                <div className="w-[350.66px] max-[1199px]:w-full max-[1199px]:justify-between max-[1199px]:flex h-[146px] ">
+                    <div className="w-full max-[1199px]:w-[69%] ">
                         <DetailWeather detail={data} title={"Summary"} />
                     </div>
-                    <div className="flex w-full  justify-between">
+                    <div className="flex w-full max-[1199px]:w-[30%] max-[1199px]:items-stretch max-[1199px]:flex-col justify-between">
                         <DetailWeather detail={data} title={"Temperature"} />
                         <DetailWeather detail={data} title={"Rain"} />
                     </div>
                 </div>
             </div>
-            <div className="w-full flex items-center justify-between">
-                <div className=" w-[400px] h-[200px] rounded-xl overflow-hidden border border-[#424242]">{data && <ImgGif icon={data.data[0].icon} />}</div>
-                <div className="bg-[#2f2f2f00] rounded-xl justify-between w-[700px] h-[200px] flex flex-wrap">
+            <div className="w-full flex items-center max-[1199px]:flex-col justify-between">
+                <div className=" w-[400px] h-[200px] rounded-xl max-[1199px]:mb-4 max-[1199px]:border-none overflow-hidden border border-[#424242]">{data && <ImgGif icon={data.data[0].icon} />}</div>
+                <div className="bg-[#2f2f2f00] max-[1199px]:w-full max-[1199px]:justify-center rounded-xl justify-between w-[700px] max-[1199px]:h-full h-[200px] flex flex-wrap">
                     {(data && (
                         <>
                             <DetailWeather detail={data} title={"Feels like"} />

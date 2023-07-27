@@ -10,7 +10,7 @@ import { MdVisibility } from "react-icons/md";
 function DetailWeather({ detail, title }) {
     let objectDetail = null;
     let data = null;
-    let width = "w-[170px]";
+    let width = "w-[170px] max-[1199px]:mr-2 max-[415px]:w-[145px]";
     let height = "h-24";
     let icon = null;
     let classes = "w-full mt-1";
@@ -21,13 +21,13 @@ function DetailWeather({ detail, title }) {
 
     if (title === "Summary") {
         width = "w-full";
-        height = "h-16";
+        height = "h-16 max-[1199px]:h-36";
         icon = <PiSubtitles />;
-        classes = "w-full text-sm h-6 overflow-auto mt-1";
+        classes = "w-full text-sm h-6 overflow-auto max-[1199px]:h-24 mt-1";
         if (objectDetail) data = objectDetail.summary;
     } else if (title === "Temperature" || title === "Rain") {
-        width = "w-[49%]";
-        height = "h-[60px]";
+        width = "w-[49%] max-[1199px]:w-full";
+        height = "h-[60px] max-[1199px]:h-[47%] max-[1199px]:mb-0";
         icon = <FaTemperatureHigh />;
         if (objectDetail) data = objectDetail.temperature_min ? ` ${objectDetail.temperature_min}° - ${objectDetail.temperature_max}°` : objectDetail.temperature + "°";
         if (title === "Rain") {
