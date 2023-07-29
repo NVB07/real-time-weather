@@ -21,7 +21,7 @@ async function GetLocation(value) {
         const response = await axios.request(options);
         return response.data;
     } catch (error) {
-        console.error(error);
+        return;
     }
 }
 
@@ -40,7 +40,7 @@ async function nearestNamedPlace(myLocation) {
         const response = await axios.request(options);
         return response.data;
     } catch (error) {
-        console.error(error);
+        return { message: "error" };
     }
 }
 
@@ -61,7 +61,7 @@ async function GetWeather(option, lat, lon) {
         const response = await axios.request(options);
         return response.data;
     } catch (error) {
-        console.error(error);
+        return;
     }
 }
 

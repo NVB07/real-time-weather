@@ -19,8 +19,8 @@ function SearchHeader({ data, weather }) {
                     <path d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z" />
                 </svg>
                 <span className="text-sm text-[#fffc] mx-1">
-                    {(data.name && <p>{data.name}</p>) || <p>...</p>}
-                    {data.adm_area1 && <i className="text-slate-400 text-xs">{data.adm_area1}</i>}
+                    {(data && data.name && <p>{data.name}</p>) || (data && <p>api usage limit reached</p>) || <p>...</p>}
+                    {data && data.adm_area1 && <i className="text-slate-400 text-xs">{data.adm_area1}</i>}
                 </span>
             </div>
             <div className="w-1/3 max-[1199px]:w-1/4 max-[768px]:absolute max-[768px]:right-0 max-[768px]:pl-0  relative flex justify-center pl-7">

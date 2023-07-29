@@ -17,8 +17,12 @@ function Search() {
         }
 
         const fetchData = async () => {
-            const response = await GetWeather(option, data.lat, data.lon);
-            setDetailsWeather(response.hourly || response.daily);
+            try {
+                const response = await GetWeather(option, data.lat, data.lon);
+                setDetailsWeather(response.hourly || response.daily);
+            } catch (error) {
+                return;
+            }
         };
         if (data) fetchData();
     }, [data, option]);

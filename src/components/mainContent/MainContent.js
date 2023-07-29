@@ -1,6 +1,7 @@
 "use client";
 import { Tabs } from "flowbite";
 import { useEffect } from "react";
+import Image from "next/image";
 import Card from "../card/Card";
 import ImgGif from "../imageGif/ImgGif";
 import DetailWeather from "../detailsWeather/DetailWeather";
@@ -112,9 +113,9 @@ function MainContent({ data, changeOption }) {
             </div>
 
             <div className="w-full flex max-[1199px]:flex-col max-[1199px]:mb-4 justify-between">
-                <div id="tabContentExample" className="overflow-x-scroll max-[1199px]:w-full rounded-lg w-2/3 pb-2 mb-4 h-[146px]">
+                <div id="tabContentExample" className="overflow-x-auto overflow-y-hidden max-[1199px]:w-full rounded-lg w-2/3 pb-2 mb-4 h-[146px]">
                     <ul className="flex hidden items-center " id="today-example" role="tabpanel" aria-labelledby="today-tab-example">
-                        {data &&
+                        {(data &&
                             data.data.map((item, index) => {
                                 if (index < 25) {
                                     return (
@@ -123,11 +124,16 @@ function MainContent({ data, changeOption }) {
                                         </div>
                                     );
                                 }
-                            })}
+                            })) || (
+                            <>
+                                <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={200} height={146} alt="" />
+                                <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={200} height={146} alt="" />
+                            </>
+                        )}
                     </ul>
 
                     <ul className="flex hidden items-center " id="next-example" role="tabpanel" aria-labelledby="next-tab-example">
-                        {data &&
+                        {(data &&
                             data.data.map((item, index) => {
                                 if (index < 25) {
                                     return (
@@ -136,7 +142,12 @@ function MainContent({ data, changeOption }) {
                                         </div>
                                     );
                                 }
-                            })}
+                            })) || (
+                            <>
+                                <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={200} height={146} alt="" />
+                                <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={200} height={146} alt="" />
+                            </>
+                        )}
                     </ul>
                 </div>
                 <div className="w-[350.66px] max-[1199px]:w-full max-[1199px]:justify-between max-[1199px]:flex h-[146px] ">
@@ -150,7 +161,9 @@ function MainContent({ data, changeOption }) {
                 </div>
             </div>
             <div className="w-full flex items-center max-[1199px]:flex-col justify-between">
-                <div className=" w-[400px] h-[200px] rounded-xl max-[1199px]:mb-4 max-[1199px]:border-none overflow-hidden border border-[#424242]">{data && <ImgGif icon={data.data[0].icon} />}</div>
+                <div className=" w-[400px] h-[200px] rounded-xl max-[1199px]:mb-4 max-[1199px]:border-none overflow-hidden border border-[#424242]">
+                    {(data && <ImgGif icon={data.data[0].icon} />) || <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={400} height={200} alt=""></Image>}
+                </div>
                 <div className="bg-[#2f2f2f00] max-[1199px]:w-full max-[1199px]:justify-center rounded-xl justify-between w-[700px] max-[1199px]:h-full h-[200px] flex flex-wrap">
                     {(data && (
                         <>
