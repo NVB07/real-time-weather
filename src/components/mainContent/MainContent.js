@@ -1,13 +1,52 @@
 "use client";
-import { Tabs } from "flowbite";
-import { useEffect } from "react";
-import Image from "next/image";
+// import { Tabs } from "flowbite";
+import { useEffect, useState, useRef } from "react";
 import Card from "../card/Card";
 import ImgGif from "../imageGif/ImgGif";
 import DetailWeather from "../detailsWeather/DetailWeather";
 
 function MainContent({ data, changeOption }) {
+    const [status, setStatus] = useState("no data");
+    const tabContent = useRef();
+    const [isActive, setIsActive] = useState(true);
     let animationFrameId = null;
+
+    const todayTab = useRef();
+    const nextTab = useRef();
+
+    useEffect(() => {
+        const activeTab = (option) => {
+            changeOption(option);
+            if (data) {
+                setStatus("Loading...");
+            }
+        };
+        const scrollToStart = (dom) => {
+            dom.scrollTo({
+                left: 0,
+                behavior: "smooth",
+            });
+        };
+        const tabActive = (tab, otherTab) => {
+            tab.current.classList.add("text-white");
+            if (otherTab.current.classList.contains("text-white")) {
+                otherTab.current.classList.remove("text-white");
+            }
+        };
+        tabActive(todayTab, nextTab);
+        todayTab.current.addEventListener("click", () => {
+            activeTab("hourly");
+            tabActive(todayTab, nextTab);
+            scrollToStart(todayTab.current);
+        });
+
+        nextTab.current.addEventListener("click", () => {
+            activeTab("daily");
+            tabActive(nextTab, todayTab);
+            scrollToStart(nextTab.current);
+        });
+    }, []);
+
     const handleScrollHorizontally = (event) => {
         event.preventDefault();
         const container = event.currentTarget;
@@ -36,7 +75,7 @@ function MainContent({ data, changeOption }) {
     };
 
     useEffect(() => {
-        const container = document.querySelector("#tabContentExample");
+        const container = tabContent.current;
         container.addEventListener("wheel", handleScrollHorizontally, { passive: false });
 
         return () => {
@@ -44,68 +83,17 @@ function MainContent({ data, changeOption }) {
         };
     }, []);
 
-    useEffect(() => {
-        const tabElements = [
-            {
-                id: "today",
-                triggerEl: document.querySelector("#today-tab-example"),
-                targetEl: document.querySelector("#today-example"),
-            },
-            {
-                id: "next",
-                triggerEl: document.querySelector("#next-tab-example"),
-                targetEl: document.querySelector("#next-example"),
-            },
-        ];
-
-        const options = {
-            defaultTabId: "today",
-            activeClasses: "text-white",
-            inactiveClasses: "text-gray-500 dark:text-gray-400",
-            onShow: () => {
-                const container = document.querySelector("#tabContentExample");
-                scrollToStart(container);
-            },
-        };
-        const tabs = new Tabs(tabElements, options);
-    }, []);
-    const scrollToStart = (dom) => {
-        dom.scrollTo({
-            left: 0,
-            behavior: "smooth",
-        });
-    };
-    const activeTab = (option) => {
-        changeOption(option);
-    };
-
     return (
         <div className="">
             <div className="mb-2  ">
                 <ul className="flex flex-wrap -mb-px text-sm font-medium text-center text-gray-500 dark:text-gray-400" id="tabExample" role="tablist">
-                    <li className="mr-2" role="presentation">
-                        <button
-                            onClick={() => activeTab("hourly")}
-                            className="inline-block p-2 rounded-t-lg "
-                            id="today-tab-example"
-                            type="button"
-                            role="tab"
-                            aria-controls="today-example"
-                            aria-selected="false"
-                        >
+                    <li className="mr-2">
+                        <button ref={todayTab} className="tabs inline-block p-2 rounded-t-lg " id="today-tab" type="button">
                             Today
                         </button>
                     </li>
-                    <li className="mr-2" role="presentation">
-                        <button
-                            onClick={() => activeTab("daily")}
-                            className="inline-block p-2 rounded-t-lg "
-                            id="next-tab-example"
-                            type="button"
-                            role="tab"
-                            aria-controls="next-example"
-                            aria-selected="false"
-                        >
+                    <li className="mr-2">
+                        <button ref={nextTab} className="tabs inline-block p-2 rounded-t-lg " id="next-tab" type="button">
                             Next 21 days
                         </button>
                     </li>
@@ -113,8 +101,8 @@ function MainContent({ data, changeOption }) {
             </div>
 
             <div className="w-full flex max-[1199px]:flex-col max-[1199px]:mb-4 justify-between">
-                <div id="tabContentExample" className="overflow-x-auto overflow-y-hidden max-[1199px]:w-full rounded-lg w-2/3 pb-2 mb-4 h-[146px]">
-                    <ul className="flex hidden items-center " id="today-example" role="tabpanel" aria-labelledby="today-tab-example">
+                <div id="tabContentExample" ref={tabContent} className="overflow-x-auto overflow-y-hidden max-[1199px]:w-full rounded-lg w-2/3 pb-2 mb-4 h-[146px]">
+                    <ul className="flex  items-center" id="today-example">
                         {(data &&
                             data.data.map((item, index) => {
                                 if (index < 25) {
@@ -125,14 +113,13 @@ function MainContent({ data, changeOption }) {
                                     );
                                 }
                             })) || (
-                            <>
-                                <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={200} height={146} alt="" />
-                                <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={200} height={146} alt="" />
-                            </>
+                            <div className="flex justify-center items-center w-full h-[146px] rounded-lg border border-[#19181c]">
+                                <h3>{status}</h3>
+                            </div>
                         )}
                     </ul>
 
-                    <ul className="flex hidden items-center " id="next-example" role="tabpanel" aria-labelledby="next-tab-example">
+                    <ul className="flex hidden items-center " id="next-example">
                         {(data &&
                             data.data.map((item, index) => {
                                 if (index < 25) {
@@ -143,10 +130,9 @@ function MainContent({ data, changeOption }) {
                                     );
                                 }
                             })) || (
-                            <>
-                                <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={200} height={146} alt="" />
-                                <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={200} height={146} alt="" />
-                            </>
+                            <div className="flex justify-center items-center w-full h-[146px] rounded-lg border border-[#19181c]">
+                                <h3>{status}</h3>
+                            </div>
                         )}
                     </ul>
                 </div>
@@ -162,7 +148,11 @@ function MainContent({ data, changeOption }) {
             </div>
             <div className="w-full flex items-center max-[1199px]:flex-col justify-between">
                 <div className=" w-[400px] h-[200px] rounded-xl max-[1199px]:mb-4 max-[1199px]:border-none overflow-hidden border border-[#424242]">
-                    {(data && <ImgGif icon={data.data[0].icon} />) || <Image src="/gif/waiting1.gif" priority className="w-auto h-auto contrast-50" width={400} height={200} alt=""></Image>}
+                    {(data && <ImgGif icon={data.data[0].icon} />) || (
+                        <div className="flex justify-center items-center w-full h-[200px] rounded-xl border border-[#19181c]">
+                            <h3>{status}</h3>
+                        </div>
+                    )}
                 </div>
                 <div className="bg-[#2f2f2f00] max-[1199px]:w-full max-[1199px]:justify-center rounded-xl justify-between w-[700px] max-[1199px]:h-full h-[200px] flex flex-wrap">
                     {(data && (
