@@ -5,9 +5,13 @@ import DataContext from "../context/DataContext";
 
 function ResultItem({ array, state = false, onResultItemClick }) {
     const { setData } = useContext(DataContext);
+    const { setStatus } = useContext(DataContext);
+    const { setDetailsWeather } = useContext(DataContext);
     let show = state ? "block" : "hidden";
 
     function getCurrentLocation() {
+        setDetailsWeather("");
+        setStatus("Loading...");
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
@@ -30,6 +34,8 @@ function ResultItem({ array, state = false, onResultItemClick }) {
     }
 
     const getItem = (item) => {
+        setDetailsWeather("");
+        setStatus("Loading...");
         onResultItemClick();
         setData(item);
     };

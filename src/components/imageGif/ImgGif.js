@@ -27,7 +27,7 @@ function ImgGif({ icon = 0 }) {
         } else if (icon > 9 && icon < 13) {
             return (
                 <div className={classes}>
-                    <Main cloud sun rain />
+                    <Main cloud rain />
                     <Main cloudGray rain />
                 </div>
             );

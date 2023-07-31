@@ -10,6 +10,8 @@ function Search() {
     const [option, setOption] = useState("hourly");
     const [detailsWeather, setDetailsWeather] = useState("");
     const [isFirstRender, setIsFirstRender] = useState(true);
+    const [status, setStatus] = useState("no data");
+
     useEffect(() => {
         if (isFirstRender) {
             setIsFirstRender(false);
@@ -29,11 +31,11 @@ function Search() {
 
     return (
         <div className="w-full min-h-screen flex items-center justify-center max-[1199px]:items-start max-[1199px]:bg-[#111015] bg-[#2e2e2e]">
-            <DataContext.Provider value={{ data, setData }}>
+            <DataContext.Provider value={{ data, setData, setStatus, setDetailsWeather }}>
                 <div className="w-[1200px] max-w-[1200px] max-[1199px]:w-full bg-[#111015] rounded-xl min-h-[80vh] p-4 px-8 relative z-20">
                     <SearchHeader data={data} weather={detailsWeather} />
                     <div className="">
-                        <MainContent data={detailsWeather} changeOption={setOption} currentOption={option} />
+                        <MainContent status={status} data={detailsWeather} changeOption={setOption} currentOption={option} />
                     </div>
                 </div>
             </DataContext.Provider>

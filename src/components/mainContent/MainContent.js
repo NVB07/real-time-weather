@@ -1,14 +1,11 @@
 "use client";
-// import { Tabs } from "flowbite";
 import { useEffect, useState, useRef } from "react";
 import Card from "../card/Card";
 import ImgGif from "../imageGif/ImgGif";
 import DetailWeather from "../detailsWeather/DetailWeather";
 
-function MainContent({ data, changeOption }) {
-    const [status, setStatus] = useState("no data");
+function MainContent({ data, changeOption, status }) {
     const tabContent = useRef();
-    const [isActive, setIsActive] = useState(true);
     let animationFrameId = null;
 
     const todayTab = useRef();
@@ -17,14 +14,11 @@ function MainContent({ data, changeOption }) {
     useEffect(() => {
         const activeTab = (option) => {
             changeOption(option);
-            if (data) {
-                setStatus("Loading...");
-            }
         };
         const scrollToStart = (dom) => {
             dom.scrollTo({
                 left: 0,
-                behavior: "smooth",
+                // behavior: "smooth",
             });
         };
         const tabActive = (tab, otherTab) => {
@@ -37,13 +31,13 @@ function MainContent({ data, changeOption }) {
         todayTab.current.addEventListener("click", () => {
             activeTab("hourly");
             tabActive(todayTab, nextTab);
-            scrollToStart(todayTab.current);
+            scrollToStart(tabContent.current);
         });
 
         nextTab.current.addEventListener("click", () => {
             activeTab("daily");
             tabActive(nextTab, todayTab);
-            scrollToStart(nextTab.current);
+            scrollToStart(tabContent.current);
         });
     }, []);
 
